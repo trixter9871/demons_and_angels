@@ -14,9 +14,9 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        float moveDistance = speed*Time.deltaTime;
+        float moveDistance = speed * Time.deltaTime;
         CheckCollisions (moveDistance);
-        transform.Translate(Vector3.forward*moveDistance);
+        transform.Translate(Vector3.forward * moveDistance);
     }
 
     void CheckCollisions (float moveDistance) 
@@ -24,7 +24,9 @@ public class Projectile : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, moveDistance, collisionMask))
+        if(Physics.Raycast(ray, out hit, moveDistance, collisionMask))
+        {
+            
+        }
     }
 }
-//dsadasdsadasdangnfgnfgn

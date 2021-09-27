@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     Vector3 velocity;
-    Rigidbody myRigidbody;
+    CharacterController controller;
 
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
     }
 
     public void Move(Vector3 _velocity) 
@@ -20,11 +19,17 @@ public class PlayerController : MonoBehaviour
 
     public void LookAt(Vector3 lookPoint) 
     {
-        Vector3 heightCorrecterPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
-        transform.LookAt (heightCorrecterPoint);
+        Vector3 heightCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
+        transform.LookAt(heightCorrectedPoint);
     }
     
-    public void FixedUpdate() {
-        myRigidbody.MovePosition(myRigidbody.position + velocity*Time.fixedDeltaTime);
+    public void Update() 
+    {
+        if(controller.isGrounded)
+        {
+            velocity.y = -5;
+        }
+        
+        controller.Move(velocity * Time.deltaTime);
     }
 }
